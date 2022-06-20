@@ -2,6 +2,7 @@
 //  SHADER
 //
 //  TODO: make them general but typescript (js) overloading kinda sucks
+
 //does not work (obviously)
 function rectangle(uv: [number, number], w: number, h: number) {
 
@@ -65,4 +66,4 @@ function shaderMain(x:number,y:number,w:number,h:number,time:number):[number,num
 function plot(st: [number,number], pct:number){
     return  smoothstep( pct-0.02, pct, st[1]) -
             smoothstep( pct, pct+0.02, st[1]);
-  }
+}

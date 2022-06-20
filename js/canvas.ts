@@ -6,7 +6,7 @@
 //WAIT I ALREADY SAID THAT
 //IF SOMEBODY FINDS THIS IN THE FUTURE THEY WILL BE CONFUSED OR WILL MOST LIKELY JUST LEAVE BUT I DONT CARE
 //
-// - more shader functions ( colormix, idk, blah, ...) (dont mind me just googling how does the "idk" function work)
+// - more shader functions ( colormix, idk, blah, ...)
 // - presets (mandelbrot, circle, something using time)
 // - continous updating (maybe only at lower resolutions) -> better time variable(resets to 0 when refreshing script)  kind of implemented
 // - atleast delete the previous shader when creating the new ones (i dont know what i meant lol)
@@ -298,7 +298,7 @@ function asciiFromCanvas(blockSize:number = 20){
 function runCustomShader() {
     let headID = document.getElementsByTagName("head")[0];
     let newScript = <HTMLScriptElement>document.getElementById("customShader");
-    if (newScript != null) {
+    if (newScript !== null) {
         newScript.remove()
     }
     newScript = document.createElement("script")
