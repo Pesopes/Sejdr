@@ -58,7 +58,7 @@ function shaderMain(x:number,y:number,w:number,h:number,time:number):[number,num
 
     fragColor[0] = (1-iterateMandelbrot(uv,25))
     fragColor[1] = fragColor[0]
-    fragColor[2] =  circle(uv,[0.5,0.5],0.01)
+    fragColor[2] = circle(uv, [0.5, 0.5], 0.01) // Try chaging the radius (the last parameter), refresh the shader and see what happens
     return fragColor;
 }
 
