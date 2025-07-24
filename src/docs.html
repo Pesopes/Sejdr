@@ -1,0 +1,53 @@
+<h4><code>shaderMain(x, y, w, h, time)</code></h4>
+<p>The main function your code must override. It's called for every pixel.
+    <br> - <code>x, y</code>: The coordinate of the current pixel.
+    <br> - <code>w, h</code>: The width and height of the canvas.
+    <br> - <code>time</code>: The time in milliseconds since the page loaded.
+    <br> Must return a color as <code>[r, g, b, a]</code> with values from 0.0 to 1.0.
+</p>
+
+<hr>
+<h4>Global Variables</h4>
+<p>These variables are available globally and reflect the current slider values.</p>
+<p><code>zoomScale</code>: The current zoom level (number).</p>
+<p><code>xScale</code>: The current X-axis translation (number).</p>
+<p><code>yScale</code>: The current Y-axis translation (number).</p>
+
+<hr>
+<h4>Utility Functions</h4>
+
+<h4><code>circle(uv, center, radius)</code></h4>
+<p>Draws a smooth-edged circle. Returns 1.0 inside and 0.0 outside.</p>
+
+<h4><code>rectangle(uv, center, width, height)</code></h4>
+<p>Draws a hard-edged rectangle. Returns 1.0 inside and 0.0 outside.</p>
+
+<h4><code>smoothstep(edge0, edge1, x)</code></h4>
+<p>Performs smooth Hermite interpolation between 0 and 1 when <code>edge0 < x < edge1</code>.</p>
+
+<h4><code>distance(vec1, vec2)</code></h4>
+<p>Calculates the Euclidean distance between two points (e.g., <code>[x1, y1]</code> and <code>[x2, y2]</code>).</p>
+
+<h4><code>clamp(value, min, max)</code></h4>
+<p>Constrains a value to be within a specified range.</p>
+
+<h4><code>lengthVec2(vec)</code></h4>
+<p>Calculates the length of a 2D vector.</p>
+
+<h4><code>fract(x)</code></h4>
+<p>Returns the fractional part of a number (e.g., <code>fract(3.14)</code> returns <code>0.14</code>).</p>
+
+<h4><code>step(edge, x)</code></h4>
+<p>Generates a step function by comparing x to edge. Returns 0.0 if <code>x < edge</code> and 1.0 otherwise.</p>
+
+<h4><code>plot(uv, percentage)</code></h4>
+<p>Useful for plotting 2D functions. Creates a line at the given percentage of the height.</p>
+
+<h4><code>iterateMandelbrot(coord, maxIterations)</code></h4>
+<p>Calculates the Mandelbrot set value for a given coordinate.</p>
+
+<h4><code>zoom(uv, amount)</code></h4>
+<p>Scales a 2D vector (e.g., your UV coordinates) by a given amount.</p>
+
+<h4><code>move(uv, amountVec)</code></h4>
+<p>Translates a 2D vector by another 2D vector.</p>
