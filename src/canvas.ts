@@ -19,9 +19,7 @@ import docsHTML from './docs.html?raw';
 //logs draw method time taken
 const LogDrawTime = true
 //when moving sliders res
-const Badres = 20
-//how fast to decrease resolution
-const ResStep = 7
+const Badres = 12
 //delay to start decreasing res
 const ResDecreaseDelay = 400
 
@@ -33,9 +31,7 @@ let resScale = 3; // higher = more pixelated , changes trough slider
 
 //variables used to dynamicllly(nice spelling) change resolution
 let lastResScale = 3
-let hasStartedMoving = true
-let getResBack: number | null = null
-let gradualRes: number | null = null
+let resRestoreTimeout: number | null = null;
 
 //some options (checkboxes)
 let grey = false
@@ -55,42 +51,30 @@ function handleSliderInput(
     transform: (v: number) => number = v => v
 ) {
     return function () {
-        if (getResBack) clearTimeout(getResBack);
+        // Clear any pending restore
+        if (resRestoreTimeout) clearTimeout(resRestoreTimeout);
 
-        getResBack = setTimeout(() => {
-            gradualRes = setInterval(() => {
-                if (lastResScale < resScale) {
-                    if (resScale - ResStep < lastResScale) {
-                        resScale -= 1;
-                    } else {
-                        resScale -= ResStep;
-                    }
-                    draw();
-                    hasStartedMoving = false;
-                } else {
-                    hasStartedMoving = true;
-                    if (gradualRes) clearTimeout(gradualRes);
-                    gradualRes = null;
-                }
-            }, 50);
-            draw();
-        }, ResDecreaseDelay);
-
-        if (hasStartedMoving) {
+        // If not already at Badres (so moving actively)
+        if (resScale !== Badres) {
             lastResScale = resScale;
-            resScale = Badres;
-            hasStartedMoving = false;
-        }
-        if (gradualRes != null) {
-            resScale = Badres;
-            clearTimeout(gradualRes);
-            gradualRes = null;
+            // Only reduce resolution if it is better than badres
+            if (resScale < Badres) {
+                resScale = Badres;
+            }
+            draw();
         }
 
+        // Update value and UI
         const val = transform(parseFloat(slider.value));
         setValue(val);
         valueDisplay.innerHTML = "  " + (Math.round(parseFloat(slider.value) * 100) / 100).toFixed(2);
         draw();
+
+        // After a delay, restore resolution
+        resRestoreTimeout = window.setTimeout(() => {
+            resScale = lastResScale;
+            draw();
+        }, ResDecreaseDelay);
     };
 }
 
