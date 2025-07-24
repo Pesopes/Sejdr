@@ -190,15 +190,19 @@ function draw() {
     if (canvas.getContext) {
         let ctx = canvas.getContext("2d");
         if (!ctx) { return; }
+
+        const imageData = ctx.createImageData(canvas.width, canvas.height);
+        const data = imageData.data;
+
         const screenW = canvas.width / resScale;
         const screenH = canvas.height / resScale;
         const timeAtStart = Date.now()
         //this runs the shader for every block on the canvas (more res more blocks more lagggg)
-        for (let x = 0; x < screenH; x++) {
-            for (let y = 0; y < screenW; y++) {
+        for (let y = 0; y < screenH; y++) {
+            for (let x = 0; x < screenW; x++) {
 
                 //shader colour
-                let sc = (window as any).shaderMain(flipX ? screenH - x : x, flipY ? screenW - y : y, screenW, screenH, timeAtStart);
+                let sc = (window as any).shaderMain(flipX ? screenW - x : x, flipY ? screenH - y : y, screenW, screenH, timeAtStart);
                 //if options ...
                 if (invert) {
                     sc = [1 - sc[0], 1 - sc[1], 1 - sc[2], sc[3]]
@@ -207,10 +211,27 @@ function draw() {
                     let sg = rgb2grey([sc[0], sc[1], sc[2]])
                     sc = [sg[0], sg[1], sg[2], sc[3]]
                 }
-                ctx.fillStyle = canvasRgba([sc[0], sc[1], sc[2]], sc[3]);
-                ctx.fillRect(x * resScale, y * resScale, resScale, resScale);
+
+                const r = sc[0] * 255;
+                const g = sc[1] * 255;
+                const b = sc[2] * 255;
+                const a = sc[3] * 255;
+
+                // Fill a resScale x resScale block of pixels
+                for (let blockY = 0; blockY < resScale; blockY++) {
+                    for (let blockX = 0; blockX < resScale; blockX++) {
+                        const canvasX = x * resScale + blockX;
+                        const canvasY = y * resScale + blockY;
+                        const index = (canvasY * canvas.width + canvasX) * 4;
+                        data[index] = r;
+                        data[index + 1] = g;
+                        data[index + 2] = b;
+                        data[index + 3] = a;
+                    }
+                }
             }
         }
+        ctx.putImageData(imageData, 0, 0);
     }
     //used to calculate execution time and log it
     const t1 = window.performance.now()
