@@ -49,10 +49,18 @@ export function plot(st: [number, number], pct: number) {
     return smoothstep(pct - 0.02, pct, st[1]) -
         smoothstep(pct, pct + 0.02, st[1]);
 }
-//does not work (obviously)
-export function rectangle(uv: [number, number], w: number, h: number) {
-
-    console.log("IDK");
+export function rectangle(
+    uv: [number, number],
+    center: [number, number],
+    w: number,
+    h: number
+) {
+    const dx = Math.abs(uv[0] - center[0]);
+    const dy = Math.abs(uv[1] - center[1]);
+    if (dx <= w / 2 && dy <= h / 2) {
+        return 1;
+    }
+    return 0;
 }
 
 
