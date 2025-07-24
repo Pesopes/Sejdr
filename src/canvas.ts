@@ -13,6 +13,7 @@
 
 // @ts-ignore
 import shaderMainText from './shaderMain.txt?raw';
+import * as shaderFunctions from './shaderFunctions';
 
 //logs draw method time taken
 const LogDrawTime = true
@@ -176,6 +177,23 @@ export function load() {
     if (runCustomBtn) runCustomBtn.onclick = () => runCustomShader();
     const asciiBtn = document.getElementById("asciiDrawBtn") as HTMLButtonElement;
     if (asciiBtn) asciiBtn.onclick = () => asciiDrawButton();
+
+    // Docs toggle and generation
+    const toggleBtn = document.getElementById('toggleDocsBtn') as HTMLButtonElement;
+    const docsContainer = document.getElementById('docsContainer') as HTMLDivElement;
+    if (toggleBtn && docsContainer) {
+        // Generate docs HTML
+        docsContainer.innerHTML = Object.entries(shaderFunctions)
+            .map(([name, fn]) => {
+                const params = fn.toString().match(/\(([^)]*)\)/);
+                return `<h4><code>${name}(${params ? params[1] : ''})</code></h4>`;
+            })
+            .join('');
+        toggleBtn.addEventListener('click', () => {
+            docsContainer.classList.toggle('hidden');
+            toggleBtn.textContent = docsContainer.classList.contains('hidden') ? 'Show Docs' : 'Hide Docs';
+        });
+    }
 }
 
 //

@@ -62,7 +62,13 @@
         </div>
 
         <div class="controls-section">
-            <h3 style="color: #cbd5e0; margin-bottom: 20px;">Custom Shader Code</h3>
+            <h3 style="color: #cbd5e0; margin-bottom: 20px;">Custom Shader Code
+                <button id="toggleDocsBtn" style="font-size: 12px; padding: 4px 8px; margin-left: 10px;">Show
+                    Docs</button>
+            </h3>
+            <div id="docsContainer" class="hidden">
+                <!-- Documentation will be injected here by JavaScript -->
+            </div>
             <textarea id="code" rows="20" cols="60" placeholder="Enter js code here" spellcheck="false"></textarea>
             <div style="margin-top: 15px;">
                 <button id="runCustomShaderBtn"

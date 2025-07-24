@@ -196,6 +196,42 @@ label {
     text-align: center;
 }
 
+/* Docs container */
+#docsContainer {
+    background: #1a202c;
+    border: 1px solid #4a5568;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    text-align: left;
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#docsContainer h4 {
+    color: #667eea;
+    margin-top: 0;
+}
+
+#docsContainer p {
+    margin: 5px 0 15px 0;
+    color: #a0aec0;
+}
+
+#docsContainer code {
+    background: #2d3748;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: #f7fafc;
+}
+
+.hidden {
+    display: none;
+}
+
 /* Mobile responsiveness */
 @media only screen and (max-width: 768px) {
     body {
