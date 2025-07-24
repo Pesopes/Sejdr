@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="icon" type="image/x-icon" href="/disjuncture/assets/hr-CMyIO7PG.png">
+    <meta charset="utf-8">
+    <title>Sejdr</title>
+  <script type="module" crossorigin src="/disjuncture/assets/index-xGiAPX49.js"></script>
+  <link rel="stylesheet" crossorigin href="/disjuncture/assets/index-C1T8vOBX.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="margin: 20px 0 30px 0; color: #f7fafc; font-size: 2.5em; font-weight: 300;">Sejdr</h1>
+
+        <canvas tabindex='1' id="canvas" width="800" height="800"></canvas>
+
+        <div class="controls-section">
+            <div class="control-group">
+                <span class="control-label">Resolution</span>
+                <input type="range" min="1" max="50" value="3" class="slider" id="resSlider">
+                <span class="value-display" id="resNum">3</span>
+            </div>
+
+            <div class="control-group">
+                <span class="control-label">Zoom</span>
+                <input type="number" min="0.1" max="100" step="0.1" value="3" id="zoomSlider">
+            </div>
+
+            <div class="control-group">
+                <span class="control-label">X translate</span>
+                <input type="range" min="-20" max="20" step="0.001" value="0" class="slider wide-slider" id="xSlider">
+                <span class="value-display" id="xNum">0.00</span>
+            </div>
+
+            <div class="control-group">
+                <span class="control-label">Y translate</span>
+                <input type="range" min="-20" max="20" step="0.001" value="0" class="slider wide-slider" id="ySlider">
+                <span class="value-display" id="yNum">0.00</span>
+            </div>
+
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="invert">
+                    <label for="invert">Invert colours</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="greyscale">
+                    <label for="greyscale">Greyscale</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="flipX">
+                    <label for="flipX">Flip X</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="flipY">
+                    <label for="flipY">Flip Y</label>
+                </div>
+            </div>
+
+            <button id="refreshShaderBtn">Refresh Shader</button>
+        </div>
+
+        <div class="controls-section">
+            <h3 style="color: #cbd5e0; margin-bottom: 20px;">Custom Shader Code</h3>
+            <textarea id="code" rows="20" cols="60" placeholder="Enter js code here" spellcheck="false"></textarea>
+            <div style="margin-top: 15px;">
+                <button id="runCustomShaderBtn"
+                    title="This creates a new script element so performance may be worse idk">Run Custom Shader</button>
+            </div>
+        </div>
+
+        <div class="controls-section">
+            <h3 style="color: #cbd5e0; margin-bottom: 20px;">ASCII Output</h3>
+            <div class="control-group">
+                <span class="control-label">ASCII Resolution</span>
+                <input type="number" min="1" max="100" step="1" value="20" id="asciiRes">
+                <span style="font-size: 12px; color: #a0aec0;">(smaller = bigger = slower)</span>
+            </div>
+            <div style="margin: 15px 0;">
+                <button id="asciiDrawBtn">Generate ASCII</button>
+            </div>
+            <textarea id="asciiOut" rows="40" cols="80" placeholder="ASCII output will appear here..." readonly
+                spellcheck="false"></textarea>
+        </div>
+    </div>
+</body>
+
+</html>
