@@ -1,7 +1,7 @@
 //
 // SHADER FUNCTIONS
 //
-//I wont explain what these do just go to thebookofshaders.com lol
+// I wont explain what these do just go to https://thebookofshaders.com
 
 export function stepVec2(xy: [number, number], edge: number) {
 
