@@ -1,3 +1,3 @@
 export default {
-    base: '/sejdr/',
+    base: '/Sejdr/',
 };
