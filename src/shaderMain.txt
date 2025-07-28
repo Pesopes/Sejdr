@@ -3,7 +3,7 @@
 
 
 //w - width of screen, h - width of screen, time (currently not working properly)
-function shaderMain(x, y, w, h, time) {
+function shaderMain(x, y, w, h) {
   let fragColor = [1, 1, 1, 1]
   let uv = [x / w, y / h]
 

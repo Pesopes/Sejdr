@@ -11,9 +11,7 @@
 // - continous updating (maybe only at lower resolutions) -> better time variable(resets to 0 when refreshing script)  kind of implemented
 // - atleast delete the previous shader when creating the new ones (i dont know what i meant lol)
 
-// @ts-ignore
 import shaderMainText from './shaderMain.txt?raw';
-// @ts-ignore
 import docsHTML from './docs.html?raw';
 
 //logs draw method time taken
@@ -272,7 +270,7 @@ function asciiFromCanvas(blockSize: number = 20) {
     }
 
     //calculates average rgb (0.0-1.0) from context.getImageData func
-    function averageColour(data) {
+    function averageColour(data: Uint8ClampedArray) {
         let averages: number[] = []
         for (let i = 0; i < data.length; i += 4) {
             let avg = (data[i] + data[i + 1] + data[i + 2] + data[i + 3]) / 4
@@ -309,13 +307,12 @@ function runCustomShader() {
 //
 
 //converts to the weird rgba format for css/canvas/idkwhat styling, uses 0.0-1.0 like in shaders
-function canvasRgba(rgb: [number, number, number], a = 1.0) {
-    return "rgba(" + rgb[0] * 255 + "," + rgb[1] * 255 + "," + rgb[2] * 255 + "," + a + ")";
-
-}
+// function canvasRgba(rgb: [number, number, number], a = 1.0) {
+//     return "rgba(" + rgb[0] * 255 + "," + rgb[1] * 255 + "," + rgb[2] * 255 + "," + a + ")";
+// }
 
 //rgb to greyscale (0.0-1.0)
-function rgb2grey(rgb: [number, number, number], a = 1.0): [number, number, number] {
+function rgb2grey(rgb: [number, number, number]): [number, number, number] {
     let greyScale = rgb[0] * 0.299 + rgb[1] * 0.587 + rgb[2] * 0.144
     return [greyScale, greyScale, greyScale]
 }
@@ -338,14 +335,13 @@ function clearCanvas() {
 
 // just copied somehitng not working really, but I dont think this is even necessary you can litterally
 // just right click and save image
-function saveCanvasImg(): void {
-    let canvas = <HTMLCanvasElement>document.getElementById("canvas");
+// function saveCanvasImg(): void {
+//     let canvas = <HTMLCanvasElement>document.getElementById("canvas");
 
-    var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+//     var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
 
-    window.location.href = image; // it will save locally
-
-}
+//     window.location.href = image; // it will save locally
+// }
 
 //
 // BUTTONS

@@ -10,14 +10,14 @@ export function stepVec2(xy: [number, number], edge: number) {
     else return 0
 }
 
-export function step(x, edge: number) {
+export function step(x: number, edge: number) {
 
     if (x > edge)
         return 1
     else return 0
 }
 
-export function smoothstep(x, edge0, edge1) {
+export function smoothstep(x: number, edge0: number, edge1: number) {
     let t = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
     return t * t * (3.0 - 2.0 * t);
 }
